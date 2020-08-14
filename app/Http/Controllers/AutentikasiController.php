@@ -12,6 +12,10 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 class AutentikasiController
 {
     public function login(){
+        if(session('akses')){
+            return redirect('/');
+        }
+
         return view('admin/login');
     }
 
@@ -30,5 +34,9 @@ class AutentikasiController
         session(['akses' => true]);
         return Response::json(['status' => true,
                                'token' => $token]);
+    }
+
+    public function prosesLogout(){
+        
     }
 }

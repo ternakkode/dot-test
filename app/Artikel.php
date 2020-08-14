@@ -19,9 +19,24 @@ class Artikel extends Model
      * @var string
      */
     protected $primaryKey = 'id_artikel';
+    protected $hidden = ['updated_at', 'pivot'];
 
     public function kategori()
     {
         return $this->belongsToMany('App\Kategori', 'artikel_kategori', 'id_artikel', 'kode_kategori');
+    }
+
+    public function getHeadlineAttribute($value)
+    {
+        return url('/'.$value);
+    }
+
+    public function getPotonganIsiAttribute($value)
+    {
+        return substr($this->isi, 3, 50);
+    }
+
+    public function getKategoriListAttribute(){
+        return $this->kategori;
     }
 }

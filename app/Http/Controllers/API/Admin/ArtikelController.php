@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request, Response;
 use App\Artikel;
 use Validator;
 
-class ArtikelController extends Controller
+class ArtikelController
 {
     public function tambah(Request $request){
 

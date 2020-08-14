@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Kategori;
 
-class KategoriController extends Controller
+class KategoriController
 {
     public function index(){
         $data['kategori'] = Kategori::paginate(10);
