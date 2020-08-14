@@ -14,7 +14,7 @@ class KategoriController
         
         return Response::json([
             'status' => 'sukses',
-            'keterangan' => 'Berhasil mengambil data Artikel',
+            'keterangan' => 'Berhasil mengambil data Kategori',
             'data'       => $data], 200);
     }
 }
