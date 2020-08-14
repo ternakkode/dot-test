@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', 'AutentikasiController@login');
 Route::post('/login', 'AutentikasiController@prosesLogin');
+Route::get('/logout', 'AutentikasiController@prosesLogout');
 
 Route::middleware('cekLogin')->group(function () {
     Route::get('/', 'ArtikelController@index');

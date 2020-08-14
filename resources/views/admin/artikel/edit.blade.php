@@ -87,7 +87,8 @@
 
                 // Headers sent along with the XMLHttpRequest to the upload server.
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'Authorization' : 'Bearer ' + localStorage.getItem("jwt_token")
                 }
             },
             language: 'id',
@@ -119,6 +120,7 @@
     $(document).ready(function () {
         $('#form_artikel').on('submit', function (event) {
             event.preventDefault();
+            let jwt = localStorage.getItem("jwt_token");
             let csrf = $('meta[name="csrf-token"]').attr('content');
             data = new FormData(this);
             data.append('isi',editor.getData());
@@ -132,7 +134,8 @@
                 cache: false,
                 processData: false,
                 headers: {
-                    'X-CSRF-Token': csrf
+                    'X-CSRF-Token': csrf,
+                    'Authorization' : 'Bearer ' + jwt
                 },
                 success: function (response) {
                     var data = response;

@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Response;
-use JWTAuth;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AutentikasiController
@@ -21,22 +21,18 @@ class AutentikasiController
 
     public function prosesLogin(Request $request){
         $credentials = $request->only('username', 'password');
-        try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return Response::json(['status' => false,
-                                         'error' => 'invalid_credentials']);
-            }
-        } catch (JWTException $e) {
-            return Response::json(['status' => false,
-                                     'error' => 'could_not_create_token']);
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->json(['status' => false]);
         }
 
-        session(['akses' => true]);
+        session(['akses' => true, 'token' => $token]);
         return Response::json(['status' => true,
                                'token' => $token]);
     }
 
     public function prosesLogout(){
-        
+        session()->forget('akses');
+        auth()->logout();
+        return redirect('login');
     }
 }

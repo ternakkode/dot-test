@@ -22,7 +22,7 @@ class ArtikelController
         } catch (\Exception $e) {
             return redirect('artikel');
         }
-       
+        
         return view('admin/artikel/edit', $data);
 
     }

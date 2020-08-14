@@ -98,14 +98,14 @@ class ArtikelController
 
     public function hapus($id_artikel){
         try {
-            $artikel = Artikel::find($id_artikel);
+            $artikel = Artikel::findOrFail($id_artikel);
         } catch (\Exception $e) {
-            return redirect('kategori');
+            return redirect('artikel');
         }
         
         $artikel->delete();
 
-        return redirect('kategori');
+        return redirect('artikel');
     }
 
     public function uploadPhoto(Request $request){
