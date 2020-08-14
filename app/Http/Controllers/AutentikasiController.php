@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Response;
 use Illuminate\Support\Facades\Auth;
+use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AutentikasiController
@@ -31,8 +32,7 @@ class AutentikasiController
     }
 
     public function prosesLogout(){
-        session()->forget('akses');
-        auth()->logout();
+        session()->forget(['akses', 'token']);
         return redirect('login');
     }
 }
