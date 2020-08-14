@@ -21,28 +21,28 @@ Admin Panel & REST API Untuk keperluan manajemen artikel blog. Silahkan kunjungi
 7. Sebelum melakuan deployment lakukan optimasi dengan optimasi package, caching config, routes dan views melalui terminal dengan command `composer install --optimize-autoloader --no-dev`, `php artisan config:cache`, `php artisan route:cache`, `php artisan view:cache`
 
 ### Database Design
-![Halaman Login](https://github.com/ternakkode/dot-test/blob/release/1.0.0/documentation/database-design.png?raw=true)
+![Halaman Login](https://github.com/ternakkode/dot-test/blob/develop/documentation/database-design.png?raw=true)
 
 ### Screenshoot
 - Halaman Login
-![Halaman Login](https://github.com/ternakkode/dot-test/blob/release/1.0.0/documentation/login.png?raw=true)
+![Halaman Login](https://github.com/ternakkode/dot-test/blob/develop/documentation/login.png?raw=true)
 
 - Halaman Awal / List Artikel
-![Halaman awal / List Artikel ](https://github.com/ternakkode/dot-test/blob/release/1.0.0/documentation/list-artikel.png?raw=true)
+![Halaman awal / List Artikel ](https://github.com/ternakkode/dot-test/blob/develop/documentation/list-artikel.png?raw=true)
 
 - Tambah Artikel
-![Tambah Artikel](https://github.com/ternakkode/dot-test/blob/release/1.0.0/documentation/tambah-artikel.png?raw=true)
+![Tambah Artikel](https://github.com/ternakkode/dot-test/blob/develop/documentation/tambah-artikel.png?raw=true)
 
 - Edit Artikel
-![Edit Artikel](https://github.com/ternakkode/dot-test/blob/release/1.0.0/documentation/edit-artikel.png?raw=true)
+![Edit Artikel](https://github.com/ternakkode/dot-test/blob/develop/documentation/edit-artikel.png?raw=true)
 
 - List Kategori
-![List Kategori](https://github.com/ternakkode/dot-test/blob/release/1.0.0/documentation/tambah-kategori.png?raw=true)
+![List Kategori](https://github.com/ternakkode/dot-test/blob/develop/documentation/tambah-kategori.png?raw=true)
 
 - Tambah Kategori
-![Tambah Kategori](https://github.com/ternakkode/dot-test/blob/release/1.0.0/documentation/tambah-artikel.png?raw=true)
+![Tambah Kategori](https://github.com/ternakkode/dot-test/blob/develop/documentation/tambah-artikel.png?raw=true)
 
 - Edit Kategori
-![Edit Kategori](https://github.com/ternakkode/dot-test/blob/release/1.0.0/documentation/tambah-artikel.png?raw=true)
+![Edit Kategori](https://github.com/ternakkode/dot-test/blob/develop/documentation/tambah-artikel.png?raw=true)
 
 
