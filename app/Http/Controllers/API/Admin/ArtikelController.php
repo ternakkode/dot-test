@@ -93,7 +93,7 @@ class ArtikelController
 
         return Response::json([
             'status' => 'sukses',
-            'keterangan' => 'Berhasil menambahkan Artikel'], 200);
+            'keterangan' => 'Berhasil merubah isi Artikel'], 200);
     }
 
     public function hapus($id_artikel){

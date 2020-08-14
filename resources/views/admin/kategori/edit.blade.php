@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4>Kategori Baru</h4>
+                <h4>Edit Kategori {{ $kategori->kode_kategori }}</h4>
             </div>
             <div class="card-body">
                 <div class="alert alert-info">
@@ -36,7 +36,7 @@
             let kode_kategori = $("#kode_kategori").val();
             let nama_kategori = $("#nama_kategori").val();
             $.ajax({
-                type: 'PUT',
+                type: 'POST',
                 url: '{{ route('edit-kategori') }}',
                 data: {
                     kode_kategori,

@@ -88,7 +88,7 @@
             <footer class="main-footer">
                 <div class="footer-left">
                     Copyright &copy; 2020 <div class="bullet"></div> Developed By <a
-                        href="https://rajabrawijaya.ub.ac.id/">M. Firhan Azmi Nor</a>
+                        href="https://seorang.engineer/">M. Firhan Azmi Nor</a>
                 </div>
             </footer>
         </div>

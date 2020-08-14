@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('jwt.verify')->group(function () {
     Route::prefix('kategori')->group(function () {
         Route::post('tambah', 'API\Admin\KategoriController@tambah')->name('tambah-kategori');
-        Route::put('edit', 'API\Admin\KategoriController@edit')->name('edit-kategori');
+        Route::post('edit', 'API\Admin\KategoriController@edit')->name('edit-kategori');
         Route::get('hapus/{kode_kategori}', 'API\Admin\KategoriController@hapus');
     });
     Route::prefix('artikel')->group(function () {
