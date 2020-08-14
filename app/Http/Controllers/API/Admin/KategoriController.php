@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request, Response;
@@ -8,7 +8,7 @@ use App\Kategori;
 use Validator;
 use Illuminate\Validation\Rule;
 
-class KategoriController extends Controller
+class KategoriController
 {
     public function tambah(Request $request){
 

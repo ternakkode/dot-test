@@ -14,18 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('jwt.verify')->group(function () {
+    Route::prefix('kategori')->group(function () {
+        Route::post('tambah', 'API\Admin\KategoriController@tambah')->name('tambah-kategori');
+        Route::post('edit', 'API\Admin\KategoriController@edit')->name('edit-kategori');
+        Route::get('hapus/{kode_kategori}', 'API\Admin\KategoriController@hapus');
+    });
+    Route::prefix('artikel')->group(function () {
+        Route::post('tambah', 'API\Admin\ArtikelController@tambah')->name('tambah-artikel');
+        Route::post('edit', 'API\Admin\ArtikelController@edit')->name('edit-artikel');
+        Route::get('hapus/{id_artikel}', 'API\Admin\ArtikelController@hapus');
+        Route::post('upload/photo', 'API\Admin\ArtikelController@uploadPhoto')->name('upload-photo');
+    });
 });
-
-Route::prefix('kategori')->group(function () {
-    Route::post('tambah', 'API\KategoriController@tambah')->name('tambah-kategori');
-    Route::put('edit', 'API\KategoriController@edit')->name('edit-kategori');
-    Route::get('hapus/{kode_kategori}', 'API\KategoriController@hapus');
-});
-Route::prefix('artikel')->group(function () {
-    Route::post('tambah', 'API\ArtikelController@tambah')->name('tambah-artikel');
-    Route::post('edit', 'API\ArtikelController@edit')->name('edit-artikel');
-    Route::get('hapus/{id_artikel}', 'API\ArtikelController@hapus');
-    Route::post('upload/photo', 'API\ArtikelController@uploadPhoto')->name('upload-photo');
+Route::prefix('v1')->group(function () {
+    Route::prefix('artikel')->group(function () {
+        Route::get('/', 'API\v1\ArtikelController@semua');
+        Route::get('/{id_artikel}', 'API\v1\ArtikelController@detail')->where('id_artikel', '[0-9]+');
+    });
+    Route::prefix('kategori')->group(function () {
+        Route::get('/', 'API\v1\KategoriController@semua');
+    });
 });
