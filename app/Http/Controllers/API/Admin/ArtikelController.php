@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request, Response;
 use App\Artikel;
 use Validator;
 
-class ArtikelController extends Controller
+class ArtikelController
 {
     public function tambah(Request $request){
 
@@ -93,19 +93,19 @@ class ArtikelController extends Controller
 
         return Response::json([
             'status' => 'sukses',
-            'keterangan' => 'Berhasil menambahkan Artikel'], 200);
+            'keterangan' => 'Berhasil merubah isi Artikel'], 200);
     }
 
     public function hapus($id_artikel){
         try {
-            $artikel = Artikel::find($id_artikel);
+            $artikel = Artikel::findOrFail($id_artikel);
         } catch (\Exception $e) {
-            return redirect('kategori');
+            return redirect('artikel');
         }
         
         $artikel->delete();
 
-        return redirect('kategori');
+        return redirect('artikel');
     }
 
     public function uploadPhoto(Request $request){

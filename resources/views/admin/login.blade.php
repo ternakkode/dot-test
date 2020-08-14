@@ -99,7 +99,7 @@
                 } else {
                     $.ajax({
                         type: 'POST',
-                        url: '{{ url('login')}}',
+                        url: '{{ url('/login')}}',
                         data: {
                             username: username,
                             password: password
@@ -110,12 +110,13 @@
                         success: function (response) {
                             var data = response;
                             if (data.status == true) {
-                                localStorage.setItem("jwt_token", data.token);
+                                localStorage.setItem('jwt_token', data.token);
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Sukses Login',
                                     text: 'Anda telah sukses login, akah dialihkan ke halaman dashboard.',
                                 })
+                                window.setTimeout(function() { location.href = '{{url('/')}}';}, 2000);
                             } else {
                                 Swal.fire({
                                     icon: 'error',

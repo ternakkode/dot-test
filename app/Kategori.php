@@ -33,6 +33,7 @@ class Kategori extends Model
      * @var string
      */
     protected $keyType = 'string';
+    protected $hidden = ['pivot'];
 
     /**
      * Indicates if the model should be timestamped.
@@ -43,6 +44,6 @@ class Kategori extends Model
 
     public function artikel()
     {
-        return $this->belongsToMany('App\Artikel', 'artikel_kategori');
+        return $this->belongsToMany('App\Artikel', 'artikel_kategori', 'kode_kategori', 'id_artikel');
     }
 }

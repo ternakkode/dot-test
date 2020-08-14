@@ -42,7 +42,7 @@
                             <div class="d-sm-none d-lg-inline-block">Halo Pengguna</div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <a href="https://rajabrawijaya.ub.ac.id/superteam/logout"
+                            <a href="{{url('logout')}}"
                                 class="dropdown-item has-icon text-danger">
                                 <i class="fas fa-sign-out-alt"></i> Logout
                             </a>
@@ -88,7 +88,7 @@
             <footer class="main-footer">
                 <div class="footer-left">
                     Copyright &copy; 2020 <div class="bullet"></div> Developed By <a
-                        href="https://rajabrawijaya.ub.ac.id/">M. Firhan Azmi Nor</a>
+                        href="https://seorang.engineer/">M. Firhan Azmi Nor</a>
                 </div>
             </footer>
         </div>

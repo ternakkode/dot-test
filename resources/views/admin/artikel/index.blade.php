@@ -25,7 +25,7 @@
             <div class="article-details">
                 <div class="article-cta">
                     <a href="{{ url('artikel/edit/'.$a->id_artikel) }}" class="btn btn-success">Edit</a>
-                    <a href="{{ url('api/artikel/hapus/'.$a->id_artikel) }}" class="btn btn-danger">Hapus</a>
+                    <a href="{{ url('api/artikel/hapus/'.$a->id_artikel.'?token='.session('token')) }}" class="btn btn-danger">Hapus</a>
                 </div>
             </div>
         </article>

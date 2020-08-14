@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h4>Kategori Baru</h4>
+                <h4>Edit Kategori {{ $kategori->kode_kategori }}</h4>
             </div>
             <div class="card-body">
                 <div class="alert alert-info">
@@ -31,19 +31,20 @@
 <script>
     $(document).ready(function () {
         $("#simpanKategori").on("click", function () {
-
+            let jwt = localStorage.getItem("jwt_token");
             let csrf = $('meta[name="csrf-token"]').attr('content');
             let kode_kategori = $("#kode_kategori").val();
             let nama_kategori = $("#nama_kategori").val();
             $.ajax({
-                type: 'PUT',
+                type: 'POST',
                 url: '{{ route('edit-kategori') }}',
                 data: {
                     kode_kategori,
                     nama_kategori
                 },
                 headers: {
-                    'X-CSRF-Token': csrf
+                    'X-CSRF-Token': csrf,
+                    'Authorization' : 'Bearer ' + jwt
                 },
                 success: function (response) {
                     var data = response;

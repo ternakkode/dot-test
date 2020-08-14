@@ -32,7 +32,7 @@
                                 <td>{{ $k->nama_kategori }}</td>
                                 <td>
                                     <a href="{{ url('kategori/edit/'.$k->kode_kategori) }}" class="btn btn-primary">Ubah</a>
-                                    <a href="{{ url('api/kategori/hapus/'.$k->kode_kategori) }}" class="btn btn-danger">Hapus</a>
+                                    <a href="{{ url('api/kategori/hapus/'.$k->kode_kategori.'?token='.session('token')) }}" class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>
                         @php $i++; @endphp
