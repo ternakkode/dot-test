@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 14, 2020 at 05:24 PM
+-- Generation Time: Aug 14, 2020 at 08:02 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -94,7 +94,9 @@ ALTER TABLE `artikel`
 -- Indexes for table `artikel_kategori`
 --
 ALTER TABLE `artikel_kategori`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_artikel` (`id_artikel`,`kode_kategori`),
+  ADD KEY `kode_kategori` (`kode_kategori`);
 
 --
 -- Indexes for table `kategori`
