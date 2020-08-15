@@ -37,12 +37,12 @@ Admin Panel & REST API Untuk keperluan manajemen artikel blog. Silahkan kunjungi
 ![Edit Artikel](https://github.com/ternakkode/dot-test/blob/develop/documentation/edit-artikel.png?raw=true)
 
 - List Kategori
-![List Kategori](https://github.com/ternakkode/dot-test/blob/develop/documentation/tambah-kategori.png?raw=true)
+![List Kategori](https://github.com/ternakkode/dot-test/blob/develop/documentation/list-kategori.png?raw=true)
 
 - Tambah Kategori
-![Tambah Kategori](https://github.com/ternakkode/dot-test/blob/develop/documentation/tambah-artikel.png?raw=true)
+![Tambah Kategori](https://github.com/ternakkode/dot-test/blob/develop/documentation/tambah-kategori.png?raw=true)
 
 - Edit Kategori
-![Edit Kategori](https://github.com/ternakkode/dot-test/blob/develop/documentation/tambah-artikel.png?raw=true)
+![Edit Kategori](https://github.com/ternakkode/dot-test/blob/develop/documentation/edit-kategori.png?raw=true)
 
 
