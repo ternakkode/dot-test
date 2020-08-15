@@ -55,7 +55,7 @@ class ArtikelController
         ];
         
         if ($request->hasFile('headline')) {
-            $input['headline'] = $request->headline;
+            $headline = $this->prosesUpload($request->file('headline'),'directory');
         }
 
         $validator = Validator::make($input, [
