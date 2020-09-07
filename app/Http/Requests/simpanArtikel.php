@@ -41,7 +41,7 @@ class simpanArtikel extends FormRequest
         if ($this->type == "tambah") {
             throw new \Illuminate\Validation\ValidationException($validator, Response::tambahArtikel(false));
         } else if ($this->type == "edit") {
-            throw new \Illuminate\Validation\ValidationException($validator, Response::tambahArtikel(false));
+            throw new \Illuminate\Validation\ValidationException($validator, Response::editArtikel(false));
         }
     }
 }
