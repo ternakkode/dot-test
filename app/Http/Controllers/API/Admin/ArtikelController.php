@@ -3,107 +3,56 @@
 namespace App\Http\Controllers\API\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\simpanArtikel;
+use App\Repositories\ArtikelRepository;
 use Illuminate\Http\Request, Response;
 use App\Artikel;
-use Validator;
 
-class ArtikelController
-{
-    public function tambah(Request $request){
+class ArtikelController{
 
-        $input = [
-            'judul'         => $request->judul,
-            'kategori'      => explode(" ", $request->kategori),
-            'headline'      => $request->headline,
-            'isi_artikel'   => $request->isi
-        ];
+    private $ArtikelRepository;
 
-        $validator = Validator::make($input, [
-            'judul'         => 'required|string|max:225|unique:artikel,judul',
-            'kategori.*'      => 'required|string|exists:kategori,kode_kategori',
-            'headline'      => 'required|image',
-            'isi_artikel'   => 'required'
-        ]);
+    public function __construct(ArtikelRepository $ArtikelRepository)
+    {
+        $this->ArtikelRepository = $ArtikelRepository;
+    }
 
-        if ($validator->fails()) {
-            return Response::json([
-                'status' => 'gagal',
-                'keterangan' => $validator->errors()->all()], 200);
-        }
-        
-        $headline = $this->prosesUpload($request->file('headline'),'directory');
+    public function tambah(simpanArtikel $request){
+        // validasi inputan
+        $data = $request->validated();
+        // upload foto headline ke server dan rename
+        $headline = $this->prosesUpload($data->file('headline'),'directory');
 
-        $artikel = new Artikel;
-        $artikel->judul = $input['judul'];
-        $artikel->headline = $headline;
-        $artikel->isi = $input['isi_artikel'];
-        $artikel->save();
-        $artikel->kategori()->attach($input['kategori']);
+        // proses ke database
+        $this->ArtikelRepository->tambah($data, $headline);
 
+        // berikan response
         return Response::json([
             'status' => 'sukses',
             'keterangan' => 'Berhasil menambahkan Artikel'], 200);
     }
 
-    public function edit(Request $request){
+    public function edit(simpanArtikel $request){
+        // validasi inputan
+        $data = $request->validated();        
 
-        $input = [
-            'id_artikel'    => $request->id_artikel,
-            'judul'         => $request->judul,
-            'kategori'      => explode(" ", $request->kategori),
-            'isi_artikel'   => $request->isi
-        ];
-        
+        // upload foto headline ke server dan rename
         if ($request->hasFile('headline')) {
             $headline = $this->prosesUpload($request->file('headline'),'directory');
         }
-
-        $validator = Validator::make($input, [
-            'id_artikel'    => 'required|integer',
-            'judul'         => 'required|string|max:225',
-            'kategori.*'    => 'required|string|exists:kategori,kode_kategori',
-            'headline'      => 'image',
-            'isi_artikel'   => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return Response::json([
-                'status' => 'gagal',
-                'keterangan' => $validator->errors()->all()], 200);
-        }
         
-        try {
-            $artikel = Artikel::find($input['id_artikel']);
-        } catch (\Exception $e) {
-            return Response::json([
-            'status' => 'gagal',
-            'keterangan' => 'Terjadi kesalahan'], 400);
-        }
+        // proses ke database
+        $this->ArtikelRepository->edit($data, $headline);
 
-        $artikel->judul = $input['judul'];
-        if ($request->hasFile('headline')) {
-            $headline = $this->prosesUpload($request->file('headline'),'directory');
-            $artikel->headline = $headline;
-        }
-        $artikel->isi = $input['isi_artikel'];
-        $artikel->save();
-
-        $artikel->kategori()->detach();
-        $artikel->kategori()->attach($input['kategori']);
-
+        // berikan response
         return Response::json([
             'status' => 'sukses',
             'keterangan' => 'Berhasil merubah isi Artikel'], 200);
     }
 
     public function hapus($id_artikel){
-        try {
-            $artikel = Artikel::findOrFail($id_artikel);
-        } catch (\Exception $e) {
-            return redirect('artikel');
-        }
-        
-        $artikel->delete();
+        // proses ke database
+        $this->ArtikelRepository->hapus($id_artikel);
 
         return redirect('artikel');
     }
