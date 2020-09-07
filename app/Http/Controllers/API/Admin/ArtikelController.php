@@ -14,22 +14,22 @@ class ArtikelController{
 
     public function __construct(ArtikelRepository $ArtikelRepository)
     {
+        // inisiasi repository
         $this->ArtikelRepository = $ArtikelRepository;
     }
 
     public function tambah(simpanArtikel $request){
         // validasi inputan
         $data = $request->validated();
+
         // upload foto headline ke server dan rename
         $headline = $this->prosesUpload($data['headline'],'directory');
 
         // proses ke database
-        $this->ArtikelRepository->tambah($data, $headline);
+        if(!$this->ArtikelRepository->tambah($data, $headline)) return Response::tambahArtikel(false);
 
         // berikan response
-        return Response::json([
-            'status' => 'sukses',
-            'keterangan' => 'Berhasil menambahkan Artikel'], 200);
+        return Response::tambahArtikel(true);
     }
 
     public function edit(simpanArtikel $request){
@@ -42,36 +42,42 @@ class ArtikelController{
         }
         
         // proses ke database
-        $this->ArtikelRepository->edit($data, $headline);
+        if(!$this->ArtikelRepository->edit($data, $headline)) return Response::editArtikel(false);
 
         // berikan response
-        return Response::json([
-            'status' => 'sukses',
-            'keterangan' => 'Berhasil merubah isi Artikel'], 200);
+        return Response::editArtikel(true);
     }
 
     public function hapus($id_artikel){
         // proses ke database
-        $this->ArtikelRepository->hapus($id_artikel);
+        if(!$this->ArtikelRepository->hapus($id_artikel)) return Response::hapusArtikel(false);
 
-        return redirect('artikel');
+        // berikan response
+        return Response::hapusArtikel(true);
     }
 
     public function uploadPhoto(Request $request){
+        // validasi apakah ada inputan file
         if($request->hasFile('upload')) {
+            // proses memindahkan file
             $file = $this->prosesUpload($request->file('upload'), 'url');
+            // validasi inputan file
+            if($file) return Response::uploadPhoto(false);
 
-            return Response::json([
-                'status' => 'sukses', // sukses / gagal
-                'keterangan' => 'berhasil upload foto ke server',
-                'url' => $file], 200);
+            // berikan response
+            return Response::uploadPhoto(true, $file);
+
+            
         }
     }
 
     private function prosesUpload($file, $output){
+        // buat folder berdasarkan default directory & date
         $directory      = 'img/artikel/'.date("Y/m/d").'/';
+        // pindahkan file ke folder yang sudah disiapkan
         $file->move($directory, $file->getClientOriginalName());
 
+        // seleksi kondisi untuk response
         if($output == 'directory') {
             return $directory.$file->getClientOriginalName();
         } else if($output == 'url') {

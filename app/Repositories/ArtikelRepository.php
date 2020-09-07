@@ -18,11 +18,9 @@ class ArtikelRepository implements ArtikelInterface {
     }
 
     public function edit($data, $headline=""){
-        try {
-            $artikel = $this->artikel::find($data['id_artikel']);
-        } catch (\Exception $e) {
-            return false;
-        }
+        $artikel = Artikel::find($data['id_artikel']);
+        
+        if(!$artikel) return false;
 
         $artikel->judul = $data['judul'];
         if ($headline != "") $artikel->headline = $headline;
@@ -36,14 +34,10 @@ class ArtikelRepository implements ArtikelInterface {
     }
 
     public function hapus($id_artikel){
-        try {
-            $artikel = Artikel::findOrFail($id_artikel);
-        } catch (\Exception $e) {
-            return false;
-        }
-        
-        $artikel->delete();
+        $artikel = Artikel::find($id_artikel);
+        if(!$artikel) return false;
 
+        $artikel->delete();
         return true;
     }
 
