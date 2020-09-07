@@ -6,31 +6,31 @@ class ArtikelRepository implements ArtikelInterface {
         
     public function tambah($data, $headline){
 
-        $Artikel = new Artikel;
-
-        $artikel->judul = $data->judul;
+        $artikel = new Artikel;
+        
+        $artikel->judul = $data['judul'];
         $artikel->headline = $headline;
-        $artikel->isi = $data->isi_artikel;
+        $artikel->isi = $data['isi_artikel'];
         $artikel->save();
-        $artikel->kategori()->attach($data->kategori);
+        $artikel->kategori()->attach($data['kategori']);
 
         return true;
     }
 
     public function edit($data, $headline=""){
         try {
-            $artikel = $this->artikel::find($data->id_artikel);
+            $artikel = $this->artikel::find($data['id_artikel']);
         } catch (\Exception $e) {
             return false;
         }
 
-        $artikel->judul = $data->judul;
+        $artikel->judul = $data['judul'];
         if ($headline != "") $artikel->headline = $headline;
-        $artikel = $data->isi_artikel;
+        $artikel = $data['isi_artikel'];
         $artikel->save();
 
         $artikel->kategori()->detach();
-        $artikel->kategori()->attach($data->kategori);
+        $artikel->kategori()->attach($data['kategori']);
 
         return true;
     }

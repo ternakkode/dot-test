@@ -21,7 +21,7 @@ class ArtikelController{
         // validasi inputan
         $data = $request->validated();
         // upload foto headline ke server dan rename
-        $headline = $this->prosesUpload($data->file('headline'),'directory');
+        $headline = $this->prosesUpload($data['headline'],'directory');
 
         // proses ke database
         $this->ArtikelRepository->tambah($data, $headline);
