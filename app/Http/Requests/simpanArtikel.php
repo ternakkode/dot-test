@@ -17,23 +17,21 @@ class simpanArtikel extends FormRequest
     
     public function rules()
     {
-        // validasi apakah proses tambah atau edit
-        if($this->type == "tambah") {
         return [
                 'judul'         => 'required|string|max:225|unique:artikel,judul',
                 'kategori.*'      => 'required|string|exists:kategori,kode_kategori',
                 'headline'      => 'required|image',
                 'isi_artikel'   => 'required'
             ];
-        } else if ($this->type == "edit") {
-            return [
-                'id_artikel'    => 'required|integer',
-                'judul'         => 'required|string|max:225',
-                'kategori.*'    => 'required|string|exists:kategori,kode_kategori',
-                'headline'      => 'image',
-                'isi_artikel'   => 'required'
-            ];
-        }
+        // } else if ($this->type == "edit") {
+        //     return [
+        //         'id_artikel'    => 'required|integer',
+        //         'judul'         => 'required|string|max:225',
+        //         'kategori.*'    => 'required|string|exists:kategori,kode_kategori',
+        //         'headline'      => 'image',
+        //         'isi_artikel'   => 'required'
+        //     ];
+        // }
     }
 
     public function failedValidation(Validator $validator)
