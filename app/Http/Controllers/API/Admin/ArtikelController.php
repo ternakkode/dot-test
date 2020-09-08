@@ -46,7 +46,7 @@ class ArtikelController
             report($err);
             DB::rollBack();
 
-            return api_error('Gagal merubah artikel');
+            return api_error($err);
         }
     }
 

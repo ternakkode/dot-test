@@ -26,7 +26,7 @@ class simpanArtikelApplication
 
     public function editArtikel($data)
     {
-        if($data['headline']) $data['headline'] = $this->uploadGambar($data['headline']);
+        $data['headline'] = isset($data['headline']) ? $this->uploadGambar($data['headline']) : null;
         
         $this->artikelRepository->edit($data);
         $this->artikelRepository->detachKategori();
