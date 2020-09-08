@@ -8,6 +8,7 @@
                 <h4>Ubah Artikel</h4>
             </div>
             <form method="post" id="form_artikel" enctype="multipart/form-data">
+            <input type="hidden" name="type" value='edit'>
             <div class="card-body">
                 <div class="alert alert-info">
                     <b>Baca beberapa aturan sebelum membuat Artikel !</b>

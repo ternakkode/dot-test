@@ -18,17 +18,17 @@ class simpanArtikelApplication
 
     public function tambahArtikel($data)
     {
-        $headline = $this->uploadGambar($data['headline']);
+        $data['headline'] = $this->uploadGambar($data['headline']);
 
-        $this->artikelRepository->tambah($data, $headline);
+        $this->artikelRepository->tambah($data);
         $this->artikelRepository->attachKategori($data['kategori']);
     }
 
     public function editArtikel($data)
     {
-        $headline = $this->uploadGambar($data['headline']);
-
-        $this->artikelRepository->edit($data, $headline);
+        if($data['headline']) $data['headline'] = $this->uploadGambar($data['headline']);
+        
+        $this->artikelRepository->edit($data);
         $this->artikelRepository->detachKategori();
         $this->artikelRepository->attachKategori($data['kategori']);
     }

@@ -24,10 +24,13 @@ class ArtikelController
             DB::beginTransaction();
             $this->simpanArtikelApplication->tambahArtikel($request->validated());
             DB::commit();
+            
+            return api_success('Berhasil menambahkan artikel baru');
         } catch (Exception $err) {
             report($err);
-            return $err;
             DB::rollBack();
+
+            return api_error('Gagal menambahkan artikel');
         }
     }
 
@@ -37,10 +40,13 @@ class ArtikelController
             DB::beginTransaction();
             $this->simpanArtikelApplication->editArtikel($request->validated());
             DB::commit();
+
+            return api_success('Berhasil merubah artikel');
         } catch (Exception $err) {
             report($err);
-            return $err;
             DB::rollBack();
+
+            return api_error('Gagal merubah artikel');
         }
     }
 
@@ -50,10 +56,13 @@ class ArtikelController
             DB::beginTransaction();
             $this->simpanArtikelApplication->hapusArtikel($id_artikel);
             DB::commit();
+
+            return api_success('Berhasil menghapus artikel');
         } catch (Exception $err) {
             report($err);
-            return $err;
             DB::rollBack();
+
+            return api_error('Gagal menghapus artikel');
         }
     }
 }

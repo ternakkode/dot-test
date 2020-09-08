@@ -1,5 +1,5 @@
 <?php namespace App\Domain\Artikel\Repositories;
-use App\Repositories\ArtikelInterface;
+use App\Domain\Artikel\Repositories\ArtikelInterface;
 use App\Artikel;
 
 
@@ -11,18 +11,19 @@ class ArtikelRepository implements ArtikelInterface {
         $this->$model = $model;
     }
 
-    public function tambah($data, $headline){
+    public function tambah($data){
         $this->model = new Artikel;
         $this->model->judul = $data['judul'];
-        $this->model->headline = $headline;
+        $this->model->headline = $data['headline'];
         $this->model->isi = $data['isi_artikel'];
         $this->model->save();
     }
 
-    public function edit($data, $headline=""){
+    public function edit($data){
         $this->model = Artikel::find($data['id_artikel']);
         $this->model->judul = $data['judul'];
-        $this->model = $data['isi_artikel'];
+        $this->model->headline = $data['headline'] ?? $this->model->headline;
+        $this->model->isi = $data['isi_artikel'];
         $this->model->save();
     }
 
