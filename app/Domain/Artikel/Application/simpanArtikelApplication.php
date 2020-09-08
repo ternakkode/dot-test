@@ -2,6 +2,7 @@
 namespace App\Domain\Artikel\Application;
 
 use App\Domain\Artikel\Repositories\ArtikelRepository;
+use App\Artikel;
 
 class simpanArtikelApplication
 {
@@ -27,26 +28,14 @@ class simpanArtikelApplication
     {
         $headline = $this->uploadGambar($data['headline']);
 
-        $this->cariArtikel($data['id_artikel']);
-        $this->artikelRepository->tambah($data, $headline);
+        $this->artikelRepository->edit($data, $headline);
         $this->artikelRepository->detachKategori();
         $this->artikelRepository->attachKategori($data['kategori']);
     }
 
     public function hapusArtikel($id_artikel)
     {
-        $this->cariArtikel($id_artikel);
-        $this->artikelRepository->hapus();
-    }
-
-    public function cariArtikel($id_artikel)
-    {
-        $artikel = Artikel::find($id_artikel);
-        if (!$artikel) {
-            throw (new Exception('Artikel tidak ditemukan'));
-        }
-
-        $this->artikelRepository = new ArtikelRepository($artikel);
+        $this->artikelRepository->hapus($id_artikel);
     }
 
     public function uploadGambar($file)

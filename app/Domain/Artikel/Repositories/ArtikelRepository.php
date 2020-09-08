@@ -31,6 +31,7 @@ class ArtikelRepository implements ArtikelInterface {
     }
 
     public function hapus($id_artikel){
+        $this->model = Artikel::find($id_artikel);
         return $this->model->delete();
     }
 
