@@ -27,6 +27,6 @@ class TambahArtikel extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new \Illuminate\Validation\ValidationException($validator, api_error('Gagal menambahkan artikel baru'));
+        throw new HttpResponseException(api_error('Gagal menambahkan artikel baru'));
     }
 }

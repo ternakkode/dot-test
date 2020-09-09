@@ -20,7 +20,7 @@ class ProsesArtikelApplication
     {
         $data->headline = $this->uploadGambar($data->headline);
 
-        $this->artikelRepository->tambah($data);
+        $this->artikelRepository->store($data);
         $this->artikelRepository->attachKategori($data->kategori);
     }
 
@@ -28,15 +28,23 @@ class ProsesArtikelApplication
     {
         $data->headline = isset($data->headline) ? $this->uploadGambar($data->headline) : null;
         
-        $this->artikelRepository->edit($data);
+        $this->cari($data->id_artikel);
+
+        $this->artikelRepository->store($data);
         $this->artikelRepository->detachKategori();
         $this->artikelRepository->attachKategori($data->kategori);
     }
 
     public function hapusArtikel($data)
     {
+        $this->cari($data->id_artikel);
+
         $this->artikelRepository->hapus($data->id_artikel);
         $this->artikelRepository->detachKategori();
+    }
+
+    public function cari($id_artikel){
+        $this->artikelRepository = new ArtikelRepository(Artikel::find($id_artikel));
     }
 
     public function uploadGambar($file)

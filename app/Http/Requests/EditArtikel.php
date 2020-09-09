@@ -28,6 +28,6 @@ class EditArtikel extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        throw new \Illuminate\Validation\ValidationException($validator, api_error('Gagal menyimpan perubahan artikel'));
+        throw new \Illuminate\Validation\ValidationException($validator, api_error($validator->errors()));
     }
 }

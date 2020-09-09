@@ -8,22 +8,13 @@ class ArtikelRepository implements ArtikelInterface {
     public $model;
 
     public function __construct(Artikel $model){
-        $this->$model = $model;
+        $this->model = $model;
     }
 
-    public function tambah($data){
-        $this->model = new Artikel;
-        $this->model->judul = $data->judul;
-        $this->model->headline = $data->headline;
-        $this->model->isi = $data->isi_artikel;
-        $this->model->save();
-    }
-
-    public function edit($data){
-        $this->model = Artikel::find($data['id_artikel']);
-        $this->model->judul = $data->judul;
+    public function store($data){
+        $this->model->judul = $data->judul ?? $this->model->judul;
         $this->model->headline = $data->headline ?? $this->model->headline;
-        $this->model->isi = $data->isi_artikel;
+        $this->model->isi = $data->isi_artikel ?? $this->model->isi_artikel;
         $this->model->save();
     }
 
@@ -32,7 +23,6 @@ class ArtikelRepository implements ArtikelInterface {
     }
 
     public function hapus($id_artikel){
-        $this->model = Artikel::find($id_artikel);
         return $this->model->delete();
     }
 

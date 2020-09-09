@@ -10,6 +10,7 @@ use App\Domain\Artikel\Application\ProsesArtikelApplication;
 use Illuminate\Support\Facades\DB;
 use Exception;
 use Illuminate\Http\Request;
+use App\Artikel;
 
 class ArtikelController
 {
@@ -33,7 +34,7 @@ class ArtikelController
             report($err);
             DB::rollBack();
 
-            return api_error($err->getMessage());
+            return api_error('Gagal menambahkan artikel baru');
         }
     }
 
@@ -49,7 +50,7 @@ class ArtikelController
             report($err);
             DB::rollBack();
 
-            return api_error($err);
+            return api_error($err->getMessage());
         }
     }
 

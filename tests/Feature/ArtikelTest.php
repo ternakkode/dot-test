@@ -45,7 +45,8 @@ class ArtikelTest extends TestCase
             'headline'      => $file
 
         ]);
-       
+        
+        $response->dump();
         $response->assertStatus(200);
     }
 
