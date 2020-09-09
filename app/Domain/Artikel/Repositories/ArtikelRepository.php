@@ -13,17 +13,17 @@ class ArtikelRepository implements ArtikelInterface {
 
     public function tambah($data){
         $this->model = new Artikel;
-        $this->model->judul = $data['judul'];
-        $this->model->headline = $data['headline'];
-        $this->model->isi = $data['isi_artikel'];
+        $this->model->judul = $data->judul;
+        $this->model->headline = $data->headline;
+        $this->model->isi = $data->isi_artikel;
         $this->model->save();
     }
 
     public function edit($data){
         $this->model = Artikel::find($data['id_artikel']);
-        $this->model->judul = $data['judul'];
-        $this->model->headline = $data['headline'] ?? $this->model->headline;
-        $this->model->isi = $data['isi_artikel'];
+        $this->model->judul = $data->judul;
+        $this->model->headline = $data->headline ?? $this->model->headline;
+        $this->model->isi = $data->isi_artikel;
         $this->model->save();
     }
 

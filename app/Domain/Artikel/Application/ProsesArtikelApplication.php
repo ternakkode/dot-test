@@ -4,7 +4,7 @@ namespace App\Domain\Artikel\Application;
 use App\Domain\Artikel\Repositories\ArtikelRepository;
 use App\Artikel;
 
-class simpanArtikelApplication
+class ProsesArtikelApplication
 {
     private $artikelRepository;
     private $directory;
@@ -18,24 +18,25 @@ class simpanArtikelApplication
 
     public function tambahArtikel($data)
     {
-        $data['headline'] = $this->uploadGambar($data['headline']);
+        $data->headline = $this->uploadGambar($data->headline);
 
         $this->artikelRepository->tambah($data);
-        $this->artikelRepository->attachKategori($data['kategori']);
+        $this->artikelRepository->attachKategori($data->kategori);
     }
 
     public function editArtikel($data)
     {
-        $data['headline'] = isset($data['headline']) ? $this->uploadGambar($data['headline']) : null;
+        $data->headline = isset($data->headline) ? $this->uploadGambar($data->headline) : null;
         
         $this->artikelRepository->edit($data);
         $this->artikelRepository->detachKategori();
-        $this->artikelRepository->attachKategori($data['kategori']);
+        $this->artikelRepository->attachKategori($data->kategori);
     }
 
-    public function hapusArtikel($id_artikel)
+    public function hapusArtikel($data)
     {
-        $this->artikelRepository->hapus($id_artikel);
+        $this->artikelRepository->hapus($data->id_artikel);
+        $this->artikelRepository->detachKategori();
     }
 
     public function uploadGambar($file)

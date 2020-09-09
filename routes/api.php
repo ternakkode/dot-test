@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('jwt.verify')->group(function () {
+// Route::middleware('jwt.verify')->group(function () {
     Route::prefix('kategori')->group(function () {
         Route::post('tambah', 'API\Admin\KategoriController@tambah')->name('tambah-kategori');
         Route::post('edit', 'API\Admin\KategoriController@edit')->name('edit-kategori');
@@ -23,10 +23,10 @@ Route::middleware('jwt.verify')->group(function () {
     Route::prefix('artikel')->group(function () {
         Route::post('tambah', 'API\Admin\ArtikelController@tambah')->name('tambah-artikel');
         Route::post('edit', 'API\Admin\ArtikelController@edit')->name('edit-artikel');
-        Route::get('hapus/{id_artikel}', 'API\Admin\ArtikelController@hapus');
+        Route::post('hapus', 'API\Admin\ArtikelController@hapus')->name('hapus-artikel');
         Route::post('upload/photo', 'API\Admin\ArtikelController@uploadPhoto')->name('upload-photo');
     });
-});
+// });
 Route::prefix('v1')->group(function () {
     Route::prefix('artikel')->group(function () {
         Route::get('/', 'API\v1\ArtikelController@semua');
